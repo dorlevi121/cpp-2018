@@ -35,7 +35,7 @@ return counter;
 }
 
 void Member::follow(Member& name){
-	if (find(following.begin(), following.end(), &name) == following.end()) 
+	if ((find(following.begin(), following.end(), &name) == following.end()) && (&name != this)) 
 	{
 		following.push_back(&name);
 		name.followers.push_back(this);
@@ -43,6 +43,8 @@ void Member::follow(Member& name){
 }
 
 void Member::unfollow(Member& name){
-	following.remove(&name);
+	if(&name != this){
+		following.remove(&name);
 	name.followers.remove(this);
+	}
 }
